@@ -43,13 +43,9 @@ m_bolt = 0.03; %kg
 p_flow = 650*6894.75729; %in Pa
 A = 0.000000043; %m^3
 F_pyro = (Pc - p_flow).*A;
-a = F_pyro./m; %m/s^2
+a = F_pyro./m
 
-dist = 0.016; %m
-t = sqrt(2.*dist./a)
-plot(m, t)
-xlabel("BP charge (g)")
-ylabel("Transient Bolt Actuation Time")
+dist = 0.016m
 
 %% TODO - ODE Calc of Bolt Accel
 
