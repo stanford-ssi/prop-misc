@@ -8,11 +8,13 @@
 Tw = KtoR(2500); %Tabulated values relate to rankine temp because sad. 
 
 % For silica-phenolic 
-a = 0.11;
-b = 2;
+% a = 0.11;
+a = 1.96e8;
+% b = 2;
+b = 0;
 c = 10^5;
 
-burntime = 20; %s
+burntime = 11; %s
 
 %% Calculate
 
@@ -20,15 +22,7 @@ rdot = a * (Tw^b) * exp(-c/Tw)
 
 burn = burntime*rdot
 
-
-
-
-
-
-
-
-
-
+burn_cm = burn*2.54
 
 
 
