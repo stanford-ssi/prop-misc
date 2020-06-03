@@ -38,15 +38,47 @@ ylabel("Initial Pressure (psi)")
 
 
 %% Dumb Bolt Transient Calc
-
+Pc = 3000; % psi
 m_bolt = 0.03; %kg
 p_flow = 650*6894.75729; %in Pa
 A = 0.000000043; %m^3
 F_pyro = (Pc - p_flow).*A;
-a = F_pyro./m
+x0 = 0.01; %m needs update
 
-dist = 0.016m
+
+% syms x 
+% 
+% for i = 1:1:100 
+%     
+%     t = i/100   
+%     res(i, i+1) = solve(x^2 + (Pc*(t^2)/(2*m_bolt))*x - (t^2)*A*p_flow/m_bolt, x)
+% 
+% end 
+
+c1 = 0;
+c2 = 0;
+k = p_flow*A*x0/m_bolt;
+
+
+tspan = [0 1];
+y0 = [0.01, 0];
+[t, y] = ode45(@myode, tspan, y0)
+
+
+plot(t, y(:, 1))
+
 
 %% TODO - ODE Calc of Bolt Accel
 
+function dydt = myode(t,y)
+Pc = 3000; % psi
+m_bolt = 0.03; %kg
+p_flow = 650*6894.75729; %in Pa
+A = 0.000000043; %m^3
+F_pyro = (Pc - p_flow).*A;
+x0 = 0.01; %m needs update
+k = p_flow*A*x0/m_bolt;
 
+dydt = [y(2); k/y(1)];
+
+end 
